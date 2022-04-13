@@ -16,7 +16,8 @@
 
     <!-- 회원사진 수정 시작 -->
     <form>
-        <img src="/upload/{{user.imgurl}}" width="300" height="300"><br>
+        <input id="id" type="hidden" value="{{user.id}}">
+        <img src="/upload/{{user.userImgurl}}" width="300" height="300"><br>
         <input id="file-name" type="text" value="{{user.userImgurl}}">
         <input type="file" name="file" id="file"><br><br>
     </form>
@@ -29,19 +30,19 @@
 
         <div>아이디</div>
         <div>
-            <input type="text" name="name" value="${principal.user.name}" readonly />
+            <input type="text" name="user-id" value="{{user.userId}}" readonly />
         </div>
         <div>닉네임</div>
         <div>
-            <input type="text" name="userName" placeholder="유저네임" value="${principal.user.username}" />
+            <input type="text" name="userName" placeholder="유저네임" value="{{user.userName}}" />
         </div>
         <div>패스워드</div>
         <div>
-            <input type="password" name="password" placeholder="패스워드" required="required" />
+            <input type="password" name="password" placeholder="패스워드" value="{{user.password}}" required="required" />
         </div>
         <div>전화번호</div>
         <div>
-            <input type="text" name="phoneNum" placeholder="휴대폰번호" value="${principal.user.website}" />
+            <input type="text" name="phoneNum" placeholder="휴대폰번호" value="{{user.phoneNum}}" />
         </div>
         <br>
         <!--회원정보 수정 끝-->
