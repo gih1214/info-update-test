@@ -27,9 +27,11 @@ public class UserController {
 
     // 회원정보수정폼
     @GetMapping("/s/user/{id}")
-    public String userInfo(@PathVariable Integer id, Model model) {
+    public String userInfo(@PathVariable Integer id, Model model, Pet pet) {
         User userEntity = userService.회원정보(id);
+        // Pet petEntity = petService.펫정보(pet, id);
         model.addAttribute("user", userEntity);
+        // model.addAttribute("pet", petEntity);
         return "user/updateForm";
     }
 

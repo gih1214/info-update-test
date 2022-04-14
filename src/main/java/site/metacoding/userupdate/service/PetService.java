@@ -18,7 +18,7 @@ public class PetService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void 펫정보(Pet pet, Integer id) {
+    public Pet 펫정보(Pet pet, Integer id) {
         Optional<User> userOp = userRepository.findById(id);
 
         if (userOp.isPresent()) {
@@ -28,6 +28,7 @@ public class PetService {
             throw new RuntimeException("펫정보를 입력할 수 없습니다");
         }
 
-        petRepository.save(pet);
+        Pet petEntity = petRepository.save(pet);
+        return petEntity;
     }
 }
