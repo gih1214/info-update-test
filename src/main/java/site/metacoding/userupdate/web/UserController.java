@@ -16,6 +16,7 @@ import site.metacoding.userupdate.domain.pet.Pet;
 import site.metacoding.userupdate.domain.user.User;
 import site.metacoding.userupdate.service.PetService;
 import site.metacoding.userupdate.service.UserService;
+import site.metacoding.userupdate.web.api.dto.pet.UpdateDto;
 import site.metacoding.userupdate.web.api.dto.user.JoinDto;
 
 @RequiredArgsConstructor
@@ -27,9 +28,9 @@ public class UserController {
 
     // 회원정보수정폼
     @GetMapping("/s/user/{id}")
-    public String userInfo(@PathVariable Integer id, Model model, Pet pet) {
+    public String userInfo(@PathVariable Integer id, Model model) {
         User userEntity = userService.회원정보(id);
-        // Pet petEntity = petService.펫정보(pet, id);
+        // Pet petEntity = petService.펫정보(pet, id, updateDto);
         model.addAttribute("user", userEntity);
         // model.addAttribute("pet", petEntity);
         return "user/updateForm";
