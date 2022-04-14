@@ -14,12 +14,14 @@
     <h1>회원정보 수정 테스트</h1>
     <hr />
 
+    <input id="id" type="hidden" value="{{user.id}}">
+
     <!-- 회원사진 수정 시작 -->
-    <form>
-        <input id="id" type="hidden" value="{{user.id}}">
+    <form action="/s/user/{{user.id}}/img-upload" method="post" enctype="multipart/form-data">
         <img src="/upload/{{user.userImgurl}}" width="300" height="300"><br>
-        <input id="file-name" type="text" value="{{user.userImgurl}}">
-        <input type="file" name="file" id="file"><br><br>
+        <input type="text" value="{{user.userImgurl}}">
+        <input type="file" name="file"><br><br>
+        <button type="submit">프로필 사진 수정하기</button><br><br>
     </form>
     <!-- 회원사진 수정 끝-->
 
@@ -54,7 +56,7 @@
     <!-- 반려동물 정보 시작 -->
     <span><b>반려동물 정보</b></span>
     <br>
-    <button type="button"><a href="/s/user/{{user.id}}/pet-form">추가하기</a></button>
+    <button type="button"><a href="/s/user/{{user.id}}/pet-form">바로가기</a></button>
     <!-- 반려동물 정보 끝 -->
 
     <!--제출버튼-->
@@ -66,5 +68,8 @@
 </body>
 
 <script src="/js/user.js"></script>
+<script>
+
+</script>
 
 </html>

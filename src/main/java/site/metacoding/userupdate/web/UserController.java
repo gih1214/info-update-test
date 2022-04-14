@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.userupdate.domain.pet.Pet;
 import site.metacoding.userupdate.domain.user.User;
-import site.metacoding.userupdate.service.PetService;
 import site.metacoding.userupdate.service.UserService;
-import site.metacoding.userupdate.web.api.dto.pet.UpdateDto;
+import site.metacoding.userupdate.web.api.dto.user.ImgUploadDto;
 import site.metacoding.userupdate.web.api.dto.user.JoinDto;
 
 @RequiredArgsConstructor
@@ -24,15 +22,21 @@ import site.metacoding.userupdate.web.api.dto.user.JoinDto;
 public class UserController {
 
     private final UserService userService;
-    private final PetService petService;
 
+    // 프로필 사진 수정 업로드
+    @PostMapping("/s/user/{id}/img-upload")
+    public String imgUpload(@PathVariable Integer id, ImgUploadDto imgUploadDto) {
+        userService.이미지수정(id, imgUploadDto); // DB에는 이미지 경로를 저장
+
+        return "redirect:/s/user/{id}";
+    }
+
+    // 테스트 완료
     // 회원정보수정폼
     @GetMapping("/s/user/{id}")
     public String userInfo(@PathVariable Integer id, Model model) {
         User userEntity = userService.회원정보(id);
-        // Pet petEntity = petService.펫정보(pet, id, updateDto);
         model.addAttribute("user", userEntity);
-        // model.addAttribute("pet", petEntity);
         return "user/updateForm";
     }
 

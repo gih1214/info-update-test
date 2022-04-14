@@ -1,5 +1,7 @@
 package site.metacoding.userupdate.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -21,22 +23,21 @@ public class PetController {
     private final HttpSession session;
 
     // // 펫정보 폼
-    @GetMapping("/s/user/{id}/pet-form")
-    public void userInfo(@PathVariable Integer id, Model model, UpdateDto updateDto) {
-        Pet petEntity = petService.펫정보(updateDto);
-        model.addAttribute("pet", petEntity);
-        System.out.println(petEntity);
-        // return "pet/updateForm";
-    }
+    // @GetMapping("/s/user/{id}/pet-form")
+    // public String userInfo(@PathVariable Integer id, Model model, Pet pet) {
+    // List<Pet> petEntity = petService.펫정보추가(id, pet);
+    // model.addAttribute("pet", petEntity);
+    // System.out.println(petEntity);
+    // return "pet/updateForm";
+    // }
 
     // 테스트 완료(DB에 들어감)
     // 펫정보 추가
     @PostMapping("/s/user/{id}/pet")
-    public String petInfo(@PathVariable Integer id, Pet pet, UpdateDto updateDto) {
+    public String petInfo(@PathVariable Integer id, Pet pet) {
         User principal = (User) session.getAttribute("principal");
-
         pet.setUser(principal);
-        petService.펫정보(updateDto);
+        petService.펫정보추가(id, pet);
         return "redirect:/s/user/" + id;
     }
 }

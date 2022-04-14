@@ -10,7 +10,6 @@ import site.metacoding.userupdate.domain.pet.Pet;
 import site.metacoding.userupdate.domain.pet.PetRepository;
 import site.metacoding.userupdate.domain.user.User;
 import site.metacoding.userupdate.domain.user.UserRepository;
-import site.metacoding.userupdate.web.api.dto.pet.UpdateDto;
 
 @RequiredArgsConstructor
 @Service
@@ -19,22 +18,20 @@ public class PetService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Pet 펫정보(UpdateDto updateDto) {
+    public void 펫정보추가(Integer userId, Pet pet) {
 
-        Pet petEntity = petRepository.pUpdate(updateDto.getUserId());
+        Optional<User> userOp = userRepository.findById(userId);
 
-        return petEntity;
-        // Optional<Pet> userOp = petRepository.pUpdate(userid);
+        if (userOp.isPresent()) {
+            User userEntity = userOp.get();
+            pet.setUser(userEntity);
+        } else {
+            throw new RuntimeException("펫정보를 입력할 수 없습니다");
+        }
 
-        // if (userOp.isPresent()) {
-        // User userEntity = userOp.get();
-        // pet.setUser(userEntity);
-        // } else {
-        // throw new RuntimeException("펫정보를 입력할 수 없습니다");
-        // }
+        petRepository.save(pet);
 
-        // Pet petEntity = petRepository.save(pet);
+        // List<Pet> petEntity = petRepository.pUpdate(userId);
         // return petEntity;
-        // }
     }
 }
