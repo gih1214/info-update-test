@@ -19,7 +19,7 @@ public class PetService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Pet 펫정보(Pet pet, Integer userid, UpdateDto updateDto) {
+    public Pet 펫정보(UpdateDto updateDto) {
 
         Pet petEntity = petRepository.pUpdate(updateDto.getUserId());
 
@@ -35,6 +35,6 @@ public class PetService {
 
         // Pet petEntity = petRepository.save(pet);
         // return petEntity;
-        // }\
+        // }
     }
 }

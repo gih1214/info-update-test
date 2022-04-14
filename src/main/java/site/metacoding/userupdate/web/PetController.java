@@ -22,8 +22,8 @@ public class PetController {
 
     // // 펫정보 폼
     @GetMapping("/s/user/{id}/pet-form")
-    public void userInfo(@PathVariable Integer id, Model model, Pet pet, UpdateDto updateDto) {
-        Pet petEntity = petService.펫정보(pet, id, updateDto);
+    public void userInfo(@PathVariable Integer id, Model model, UpdateDto updateDto) {
+        Pet petEntity = petService.펫정보(updateDto);
         model.addAttribute("pet", petEntity);
         System.out.println(petEntity);
         // return "pet/updateForm";
@@ -36,7 +36,7 @@ public class PetController {
         User principal = (User) session.getAttribute("principal");
 
         pet.setUser(principal);
-        petService.펫정보(pet, id, updateDto);
+        petService.펫정보(updateDto);
         return "redirect:/s/user/" + id;
     }
 }
