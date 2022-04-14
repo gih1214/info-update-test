@@ -34,49 +34,86 @@
         </div>
         <div>닉네임</div>
         <div>
-            <input type="text" name="userName" placeholder="유저네임" value="{{user.userName}}" />
+            <input id="user-name" type="text" name="userName" placeholder="유저네임" value="{{user.userName}}" />
         </div>
         <div>패스워드</div>
         <div>
-            <input type="password" name="password" placeholder="패스워드" value="{{user.password}}" required="required" />
+            <input id="password" type="password" name="password" placeholder="패스워드" value="{{user.password}}"
+                required="required" />
         </div>
         <div>전화번호</div>
         <div>
-            <input type="text" name="phoneNum" placeholder="휴대폰번호" value="{{user.phoneNum}}" />
+            <input id="phone-num" type="text" name="phoneNum" placeholder="휴대폰번호" value="{{user.phoneNum}}" />
         </div>
         <br>
-        <!--회원정보 수정 끝-->
+        <button id="btn-update" type="button">수정하기</button>
+    </form>
+    <hr />
+    <!--회원정보 수정 끝-->
 
-        <!-- 반려동물 정보 시작 -->
-        <span><b>반려동물 정보</b></span>
+    <!-- 반려동물 정보 시작 -->
+    <span><b>반려동물 정보</b></span>
 
+    <form action="/s/user/{{user.id}}/pet" method="post">
         <div>이름</div>
         <div>
-            <input type="text" name="petName" placeholder="펫 이름" value="${principal.user.gender}" />
+            <input id="pet-name" type="text" name="petName" placeholder="펫 이름" value="" />
         </div>
         <div>성별</div>
         <div>
-            <input type="text" name="petGender" placeholder="성별" value="${principal.user.email}" readonly="readonly" />
+            <input id="pet-gender" type="text" name="petGender" placeholder="성별" value="" />
         </div>
         <div>종류</div>
         <div>
-            <input type="text" name="petSpices" placeholder="반려동물 종" value="${principal.user.phone}" />
+            <input id="pet-spices" type="text" name="petSpices" placeholder="반려동물 종" value="" />
         </div>
         <div>나이</div>
         <div>
-            <input type="text" name="petAge" placeholder="나이" value="${principal.user.gender}" />
+            <input id="pet-age" type="text" name="petAge" placeholder="나이" value="" />
         </div>
         <br>
         <!-- 반려동물 정보 끝 -->
 
         <!--제출버튼-->
-        <button>수정하기</button>
-        <button>펫 추가 입력하기</button>
+        <button type="submit">추가하기</button>
         <button>삭제하기</button>
         <!--제출버튼end-->
 
     </form>
     <!--회원정보 및 반려동물정보 수정 form 끝-->
 </body>
+
+<script>
+    // 1. 회원정보 수정 이벤트 리스너
+    $("#btn-update").click(() => {
+        update();
+    });
+
+    // 2. 회원정보 수정 함수
+    async function update() {
+        let id = $("#id").val();
+        let updateDto = {
+            userName: $("#user-name").val(),
+            password: $("#password").val(),
+            phoneNum: $("#phone-num").val()
+        }
+
+        let response = await fetch(`/s/api/user/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(updateDto),
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            }
+        });
+        let responseParse = await response.json();
+
+        if (responseParse.code == 1) {
+            alert("업데이트 성공");
+            location.href = `/s/user/${id}`;
+        } else {
+            alert("업데이트 실패");
+        }
+    }
+</script>
 
 </html>

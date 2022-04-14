@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.userupdate.domain.pet.Pet;
 import site.metacoding.userupdate.domain.user.User;
+import site.metacoding.userupdate.service.PetService;
 import site.metacoding.userupdate.service.UserService;
 import site.metacoding.userupdate.web.api.dto.user.JoinDto;
 
@@ -21,6 +23,7 @@ import site.metacoding.userupdate.web.api.dto.user.JoinDto;
 public class UserController {
 
     private final UserService userService;
+    private final PetService petService;
 
     // 회원정보수정폼
     @GetMapping("/s/user/{id}")
