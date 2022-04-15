@@ -18,16 +18,26 @@
 
     <!-- 회원사진 수정 시작 -->
     <form action="/s/user/{{user.id}}/img-upload" method="post" enctype="multipart/form-data">
-        <img src="/upload/{{user.userImgurl}}" width="300" height="300"><br>
+        <!-- 이미지 지연 로딩 onerror 써서 해결 -->
+        <img id="my-img" src="/upload/{{user.userImgurl}}" onerror="this.src='/upload/{{user.userImgurl}}'" width="300"
+            height="300"><br>
         <input type="text" value="{{user.userImgurl}}">
         <input type="file" name="file"><br><br>
         <button type="submit">프로필 사진 수정하기</button><br><br>
     </form>
     <!-- 회원사진 수정 끝-->
 
-    <!--회원정보 및 반려동물정보 수정 form 시작-->
+    <script>
+        $(document).ready(function () {
+            setTimeout(() => {
+                $("#my-img").attr("src", "/upload/{{user.userImgurl}}");
+            }, 1000);
+        });
+    </script>
+
+    <!--회원정보 수정 form 시작-->
     <form>
-        <!--회원정보 수정 시작-->
+        <!--회원정보 수정-->
         <span><b>회원 정보</b></span>
 
         <div>아이디</div>
@@ -50,21 +60,16 @@
         <br>
         <button id="btn-update" type="button">수정하기</button>
     </form>
+    <!--회원정보 수정 form 끝-->
     <hr />
-    <!--회원정보 수정 끝-->
 
-    <!-- 반려동물 정보 시작 -->
+    <!-- 반려동물 정보 -->
     <span><b>반려동물 정보</b></span>
     <br>
-    <button type="button"><a href="/s/user/{{user.id}}/pet-form">바로가기</a></button>
-    <!-- 반려동물 정보 끝 -->
-
     <!--제출버튼-->
+    <button type="button"><a href="/s/user/{{user.id}}/pet-form">바로가기</a></button>
     <button>삭제하기</button>
-    <!--제출버튼end-->
-
-    </form>
-    <!--회원정보 및 반려동물정보 수정 form 끝-->
+    <!--제출버튼 끝-->
 </body>
 
 <script src="/js/user.js"></script>

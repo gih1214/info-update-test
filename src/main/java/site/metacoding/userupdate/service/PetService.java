@@ -17,6 +17,11 @@ public class PetService {
     private final PetRepository petRepository;
     private final UserRepository userRepository;
 
+    public Pet 펫정보보기(Integer userId) {
+        Pet petEntity = petRepository.pUpdate(userId);
+        return petEntity;
+    }
+
     @Transactional
     public void 펫정보추가(Integer userId, Pet pet) {
 
@@ -30,8 +35,5 @@ public class PetService {
         }
 
         petRepository.save(pet);
-
-        // List<Pet> petEntity = petRepository.pUpdate(userId);
-        // return petEntity;
     }
 }
