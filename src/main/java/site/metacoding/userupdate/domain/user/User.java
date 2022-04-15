@@ -63,4 +63,15 @@ public class User {
     private LocalDateTime createDate;
     @LastModifiedDate // update 할때만 동작
     private LocalDateTime updateDate;
+
+    // petEntity가 잘 들어왔는지 syso으로 확인하려면 toString에서 pet을 지워줘야 됨
+    // @Override
+    // public String toString() {
+    // return "User [createDate=" + createDate + ", id=" + id + ", password=" +
+    // password
+    // + ", phoneNum=" + phoneNum + ", updateDate=" + updateDate + ", userId=" +
+    // userId + ", userImgurl="
+    // + userImgurl + ", userName=" + userName + "]";
+    // }
+
 }

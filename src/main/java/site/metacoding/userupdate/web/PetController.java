@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.userupdate.domain.pet.Pet;
 import site.metacoding.userupdate.domain.user.User;
 import site.metacoding.userupdate.service.PetService;
-import site.metacoding.userupdate.web.api.dto.pet.UpdateDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -20,21 +19,14 @@ public class PetController {
     private final PetService petService;
     private final HttpSession session;
 
-    // // 펫정보 폼
-    // @GetMapping("/s/user/{id}/pet-form")
-    // public String userInfo(@PathVariable Integer id, Model model, Pet pet) {
-    // List<Pet> petEntity = petService.펫정보추가(id, pet);
-    // model.addAttribute("pet", petEntity);
-    // System.out.println(petEntity);
-    // return "pet/updateForm";
-    // }
-
+    // 테스트 완료
     // 펫정보 폼
     @GetMapping("/s/user/{id}/pet-form")
     public String petInfo(@PathVariable Integer id, Model model) {
         Pet petEntity = petService.펫정보보기(id);
         model.addAttribute("pet", petEntity);
-        System.out.println(petEntity);
+        // syso은 User에서 toString을 직접 설정했을 때만 사용할 것. 아니면 오류터짐
+        // System.out.println(petEntity);
         return "/pet/updateForm";
     }
 
