@@ -27,14 +27,6 @@
     </form>
     <!-- 회원사진 수정 끝-->
 
-    <script>
-        $(document).ready(function () {
-            setTimeout(() => {
-                $("#my-img").attr("src", "/upload/{{user.userImgurl}}");
-            }, 1000);
-        });
-    </script>
-
     <!--회원정보 수정 form 시작-->
     <form>
         <!--회원정보 수정-->
@@ -63,13 +55,14 @@
     <!--회원정보 수정 form 끝-->
     <hr />
 
-    <!-- 반려동물 정보 -->
+    <!-- 반려동물 정보 시작 -->
     <span><b>반려동물 정보</b></span>
-    <br>
-    <!--제출버튼-->
-    <button type="button"><a href="/s/user/{{user.id}}/pet-form">바로가기</a></button>
-    <button>삭제하기</button>
-    <!--제출버튼 끝-->
+    <br /><br />
+    <button type="submit"><a href="/s/user/{{user.id}}/pet-form">추가하러가기</a></button>
+    <button type="button"><a href="/s/user/{{user.id}}/pet-update-form">수정하러가기</a></button>
+    <button type="button"><a href="/s/user/{{user.id}}/pet-delete-form">삭제하러가기</a></button>
+    <!-- 반려동물 정보 끝 -->
+
 </body>
 
 <script src="/js/user.js"></script>

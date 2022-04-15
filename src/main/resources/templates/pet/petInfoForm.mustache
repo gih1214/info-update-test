@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반려동물 테스트</title>
+</head>
+
+<body>
+    <h1>반려동물 정보 추가 테스트</h1>
+    <hr />
+
+    <!-- 반려동물 정보 시작 -->
+    <span><b>반려동물 정보</b></span>
+
+    <input id="id" type="hidden" value="{{user.id}}">
+    <!--반려동물정보 수정 form 시작-->
+    <form action="/s/user/{{user.id}}/pet" method="post">
+        <div>이름</div>
+        <div>
+            <input type="text" name="petName" placeholder="펫 이름" />
+        </div>
+        <div>성별</div>
+        <div>
+            <input type="text" name="petGender" placeholder="성별" />
+        </div>
+        <div>종류</div>
+        <div>
+            <input type="text" name="petSpices" placeholder="반려동물 종" />
+        </div>
+        <div>나이</div>
+        <div>
+            <input type="text" name="petAge" placeholder="나이" />
+        </div>
+        <br>
+        <!-- 반려동물 정보 끝 -->
+
+        <button type="submit">등록하기</button>
+
+    </form>
+    <!--반려동물정보 수정 form 끝-->
+
+</body>
+
+</html>

@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UpdateDto {
-    private int userId;
+public class InsertDto {
     private String petName;
     private String petGender;
     private String petSpices;
     private String petAge;
+    private Integer userId;
 }

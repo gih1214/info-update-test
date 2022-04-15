@@ -23,6 +23,7 @@ public class UserController {
 
     private final UserService userService;
 
+    // 테스트 완료
     // 프로필 사진 수정 업로드
     @PostMapping("/s/user/{id}/img-upload")
     public String imgUpload(@PathVariable Integer id, ImgUploadDto imgUploadDto) {
@@ -47,6 +48,7 @@ public class UserController {
         return "/user/joinForm";
     }
 
+    // 리팩토링 필요 - uuid 서비스로 이동해야 됨
     // 테스트 완료
     // 회원가입
     @PostMapping("/join")

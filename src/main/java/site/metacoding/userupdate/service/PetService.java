@@ -17,11 +17,14 @@ public class PetService {
     private final PetRepository petRepository;
     private final UserRepository userRepository;
 
+    // 테스트 완료
     public Pet 펫정보보기(Integer userId) {
         Pet petEntity = petRepository.pUpdate(userId);
         return petEntity;
     }
 
+    // 리팩토링중...
+    // 테스트완료
     @Transactional
     public void 펫정보추가(Integer userId, Pet pet) {
 

@@ -5,19 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>반려동물 정보 추가 테스트</title>
+    <title>반려동물 정보 수정 테스트</title>
     <!-- 제이쿼리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <h1>반려동물 정보 추가 테스트</h1>
+    <h1>반려동물 정보 수정 테스트</h1>
     <hr />
 
     <!-- 반려동물 정보 시작 -->
     <span><b>반려동물 정보</b></span>
 
     <input id="id" type="hidden" value="{{pet.user.id}}">
+    <!--반려동물정보 수정 form 시작-->
     <form action="/s/user/{{pet.user.id}}/pet" method="post">
         <div>이름</div>
         <div>
@@ -38,15 +39,11 @@
         <br>
         <!-- 반려동물 정보 끝 -->
 
-        <!--제출버튼-->
         <button type="submit"><a href="/s/user/{{pet.user.id}}/pet-form">수정하기</a></button>
         <button type="button">삭제하기</button>
-        <!--제출버튼end-->
 
     </form>
-    <!--회원정보 및 반려동물정보 수정 form 끝-->
+    <!--반려동물정보 수정 form 끝-->
 </body>
-
-<!-- <script src="/js/user.js"></script> -->
 
 </html>

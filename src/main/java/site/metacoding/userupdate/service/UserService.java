@@ -21,6 +21,19 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    // 펫정보 추가하기 폼
+    // 머스태치에 user의 id가 필요해서 만들었음
+    public User 펫정보추가폼(Integer id) {
+        Optional<User> userOp = userRepository.findById(id);
+
+        if (userOp.isPresent()) {
+            return userOp.get();
+        } else {
+            System.out.println("아이디를 찾을 수 없습니다.");
+            return null;
+        }
+    }
+
     // 회원 이미지(프로필사진) 수정
     @Transactional
     public void 이미지수정(Integer id, ImgUploadDto imgUploadDto) {

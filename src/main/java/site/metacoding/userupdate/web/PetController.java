@@ -12,17 +12,19 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.userupdate.domain.pet.Pet;
 import site.metacoding.userupdate.domain.user.User;
 import site.metacoding.userupdate.service.PetService;
+import site.metacoding.userupdate.service.UserService;
 
 @RequiredArgsConstructor
 @Controller
 public class PetController {
+    private final UserService userService;
     private final PetService petService;
     private final HttpSession session;
 
     // 테스트 완료
-    // 펫정보 폼
-    @GetMapping("/s/user/{id}/pet-form")
-    public String petInfo(@PathVariable Integer id, Model model) {
+    // 펫정보 관리하기 폼
+    @GetMapping("/s/user/{id}/pet-update-form")
+    public String updateForm(@PathVariable Integer id, Model model) {
         Pet petEntity = petService.펫정보보기(id);
         model.addAttribute("pet", petEntity);
         // syso은 User에서 toString을 직접 설정했을 때만 사용할 것. 아니면 오류터짐
@@ -30,13 +32,24 @@ public class PetController {
         return "/pet/updateForm";
     }
 
-    // 테스트 완료(DB에 들어감)
+    // 테스트 완료
+    // 펫정보 추가하기 폼
+    @GetMapping("/s/user/{id}/pet-form")
+    public String petInfoForm(@PathVariable Integer id, Model model) {
+        User userEntity = userService.펫정보추가폼(id);
+        model.addAttribute("user", userEntity);
+        return "/pet/petInfoForm";
+    }
+
+    // 테스트 완료
     // 펫정보 추가하기
     @PostMapping("/s/user/{id}/pet")
     public String petInfo(@PathVariable Integer id, Pet pet) {
         User principal = (User) session.getAttribute("principal");
+
         pet.setUser(principal);
         petService.펫정보추가(id, pet);
-        return "redirect:/s/user/" + id;
+
+        return "redirect:/s/user/" + id + "/pet-update-form";
     }
 }
