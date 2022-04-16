@@ -13,6 +13,7 @@ import site.metacoding.userupdate.domain.pet.Pet;
 import site.metacoding.userupdate.domain.user.User;
 import site.metacoding.userupdate.service.PetService;
 import site.metacoding.userupdate.service.UserService;
+import site.metacoding.userupdate.web.api.dto.pet.PetResponseDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -26,6 +27,29 @@ public class PetController {
     @GetMapping("/s/user/{userId}/pet-update-form")
     public String updateForm(@PathVariable Integer userId, Model model) {
         Pet petEntity = petService.펫정보보기(userId);
+
+        // 정보가 여러개 추가되면 사용하기
+        // User principal = (User) session.getAttribute("principal");
+        // List<PetResponseDto> pets = new ArrayList<>();
+
+        // for (Pet pet : petEntity) {
+        // PetResponseDto dto = new PetResponseDto();
+        // dto.setPet(pet);
+
+        // if (principal != null) {
+        // if (principal.getId() == pet.getUser().getId()) {
+        // dto.setAuth(true); // or false
+        // } else {
+        // dto.setAuth(false); // or false
+        // }
+        // } else {
+        // dto.setAuth(false); // or false
+        // }
+
+        // pets.add(dto);
+        // }
+        // model.addAttribute("pet", pets);
+
         model.addAttribute("pet", petEntity);
         // syso은 User에서 toString을 직접 설정했을 때만 사용할 것. 아니면 오류터짐
         // System.out.println(petEntity);

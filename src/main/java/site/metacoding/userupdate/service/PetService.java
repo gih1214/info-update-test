@@ -17,6 +17,23 @@ public class PetService {
     private final PetRepository petRepository;
     private final UserRepository userRepository;
 
+    // 펫 삭제
+    @Transactional
+    public void 펫삭제(Integer id, User principal) {
+        // 권한체크할 때 사용하기
+        // Optional<Pet> petOp = petRepository.findById(id);
+        // if (petOp.isPresent()) {
+        // Pet petEntity = petOp.get();
+        // if (principal.getId() != petEntity.getUser().getId()) {
+        // throw new RuntimeException("권한이 없습니다");
+        // }
+        // } else {
+        // throw new RuntimeException("해당 댓글이 없습니다");
+        // }
+
+        petRepository.deleteById(id);
+    }
+
     // 테스트 완료
     public Pet 펫정보보기(Integer userId) {
         Pet petEntity = petRepository.pUpdate(userId);
