@@ -10,6 +10,7 @@ import site.metacoding.userupdate.domain.pet.Pet;
 import site.metacoding.userupdate.domain.pet.PetRepository;
 import site.metacoding.userupdate.domain.user.User;
 import site.metacoding.userupdate.domain.user.UserRepository;
+import site.metacoding.userupdate.web.api.dto.pet.UpdateDto;
 
 @RequiredArgsConstructor
 @Service
@@ -17,6 +18,26 @@ public class PetService {
     private final PetRepository petRepository;
     private final UserRepository userRepository;
 
+    // 테스트 완료
+    // 펫 수정
+    @Transactional
+    public void 펫수정(Integer id, UpdateDto updateDto) {
+
+        Optional<Pet> petOp = petRepository.findById(id);
+
+        if (petOp.isPresent()) {
+            // 영속화된 오브젝트 수정
+            Pet petEntity = petOp.get();
+            petEntity.setPetName(updateDto.getPetName());
+            petEntity.setPetGender(updateDto.getPetGender());
+            petEntity.setPetSpices(updateDto.getPetSpices());
+            petEntity.setPetAge(updateDto.getPetAge());
+        } else {
+            throw new RuntimeException("아이디를 찾을 수 없습니다.");
+        }
+    }
+
+    // 테스트 완료
     // 펫 삭제
     @Transactional
     public void 펫삭제(Integer id, User principal) {

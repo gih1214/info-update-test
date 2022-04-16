@@ -13,7 +13,6 @@ import site.metacoding.userupdate.domain.pet.Pet;
 import site.metacoding.userupdate.domain.user.User;
 import site.metacoding.userupdate.service.PetService;
 import site.metacoding.userupdate.service.UserService;
-import site.metacoding.userupdate.web.api.dto.pet.PetResponseDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -23,7 +22,7 @@ public class PetController {
     private final HttpSession session;
 
     // 테스트 완료
-    // 펫정보 수정하기 폼
+    // 펫정보 수정하기 폼 (여기에 삭제까지 추가)
     @GetMapping("/s/user/{userId}/pet-update-form")
     public String updateForm(@PathVariable Integer userId, Model model) {
         Pet petEntity = petService.펫정보보기(userId);

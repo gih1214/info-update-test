@@ -21,6 +21,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    // 테스트 완료
     // 펫정보 추가하기 폼
     // 머스태치에 user의 id가 필요해서 만들었음
     public User 펫정보추가폼(Integer id) {
@@ -34,6 +35,7 @@ public class UserService {
         }
     }
 
+    // 테스트 완료
     // 회원 이미지(프로필사진) 수정
     @Transactional
     public void 이미지수정(Integer id, ImgUploadDto imgUploadDto) {
@@ -97,6 +99,7 @@ public class UserService {
 
     // 테스트 완료
     // 회원가입
+    @Transactional
     public void 회원가입(User user) {
         userRepository.save(user);
     }

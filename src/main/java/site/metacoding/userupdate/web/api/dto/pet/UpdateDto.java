@@ -12,5 +12,4 @@ public class UpdateDto {
     private String petGender;
     private String petSpices;
     private String petAge;
-    private Integer userId;
 }

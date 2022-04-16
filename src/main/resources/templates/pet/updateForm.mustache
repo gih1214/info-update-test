@@ -17,29 +17,30 @@
     <!-- 반려동물 정보 시작 -->
     <span><b>반려동물 정보</b></span>
 
-    <input id="id" type="hidden" value="{{pet.user.id}}">
+    <input id="id" type="hidden" value="{{pet.id}}">
+    <input id="user-id" type="hidden" value="{{pet.user.id}}">
     <!--반려동물정보 수정 form 시작-->
-    <form action="/s/user/{{pet.user.id}}/pet" method="post">
+    <form>
         <div>이름</div>
         <div>
-            <input type="text" name="petName" placeholder="펫 이름" value="{{pet.petName}}" />
+            <input id="pet-name" type="text" placeholder="펫 이름" value="{{pet.petName}}" />
         </div>
         <div>성별</div>
         <div>
-            <input type="text" name="petGender" placeholder="성별" value="{{pet.petGender}}" />
+            <input id="pet-gender" type="text" placeholder="성별" value="{{pet.petGender}}" />
         </div>
         <div>종류</div>
         <div>
-            <input type="text" name="petSpices" placeholder="반려동물 종" value="{{pet.petSpices}}" />
+            <input id="pet-spices" type="text" placeholder="반려동물 종" value="{{pet.petSpices}}" />
         </div>
         <div>나이</div>
         <div>
-            <input type="text" name="petAge" placeholder="나이" value="{{pet.petAge}}" />
+            <input id="pet-age" type="text" placeholder="나이" value="{{pet.petAge}}" />
         </div>
         <br>
         <!-- 반려동물 정보 끝 -->
 
-        <button type="submit"><a href="/s/api/user/{{pet.user.id}}/pet-update-form">수정하기</a></button>
+        <button id="btn-pet-update" type="button">수정하기</button>
         <button type="button" onclick="deletePet('{{pet.id}}');">삭제하기</button>
 
     </form>
@@ -47,18 +48,45 @@
 </body>
 
 <script>
-    async function deletePet(petId) {
-        let response = await fetch(`/s/api/pet/${petId}`, {
-            method: "DELETE"
+    // 1. 반려동물 정보 수정 이벤트 리스너
+    $("#btn-pet-update").click(() => {
+        update();
+    });
+
+    // 2. 반려동물 정보 수정 함수
+    async function update() {
+        let id = $("#id").val();
+        let userId = $("#user-id").val();
+        let updateDto = {
+            petName: $("#pet-name").val(),
+            petGender: $("#pet-gender").val(),
+            petSpices: $("#pet-spices").val(),
+            petAge: $("#pet-age").val()
+        }
+
+        let response = await fetch(`/s/api/pet/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(updateDto),
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            }
         });
+        // console.log(response);
+
+        // 여기서 브라우저 콘솔창에 오류뜸.
+        // DB랑 브라우저에서는 잘 들어갔는데 뭐가 문제일까?
         let responseParse = await response.json();
-        if (responseParse.code == 1) {
-            alert("삭제 성공");
-            location.reload(); // ajax + ssr
+        console.log(responseParse);
+
+        if (response.status === 200) {
+            alert("업데이트 성공");
+            location.href = `/s/user/${userId}/pet-update-form`;
         } else {
-            alert("삭제 실패");
+            alert("업데이트 실패");
         }
     }
 </script>
+
+<script src="/js/pet.js"></script>
 
 </html>

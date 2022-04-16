@@ -19,6 +19,9 @@ async function update() {
             "Content-Type": "application/json; charset=utf-8"
         }
     });
+
+    // 여기서 브라우저 콘솔창에 오류뜸.
+    // DB랑 브라우저에서는 잘 들어갔는데 뭐가 문제일까?
     let responseParse = await response.json();
 
     if (responseParse.code == 1) {
