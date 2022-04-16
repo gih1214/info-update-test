@@ -23,7 +23,6 @@ public class PetService {
         return petEntity;
     }
 
-    // 리팩토링중...
     // 테스트완료
     @Transactional
     public void 펫정보추가(Integer userId, Pet pet) {

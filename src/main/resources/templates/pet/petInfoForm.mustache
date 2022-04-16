@@ -15,9 +15,9 @@
     <!-- 반려동물 정보 시작 -->
     <span><b>반려동물 정보</b></span>
 
-    <input id="id" type="hidden" value="{{user.id}}">
+    <input id="id" type="hidden" value="{{userId}}">
     <!--반려동물정보 수정 form 시작-->
-    <form action="/s/user/{{user.id}}/pet" method="post">
+    <form action="/s/user/{{userId}}/pet" method="post">
         <div>이름</div>
         <div>
             <input type="text" name="petName" placeholder="펫 이름" />

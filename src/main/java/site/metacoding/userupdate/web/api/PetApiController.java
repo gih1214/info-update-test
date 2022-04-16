@@ -14,13 +14,13 @@ public class PetApiController {
     private final PetService petService;
 
     // 반려동물 정보 수정하기
-    @PutMapping("/s/user/{id}/pet-update-form")
+    @PutMapping("/s/api/user/{id}/pet-update-form")
     public String petUpdate() {
         return null;
     }
 
     // 반려동물 정보 삭제하기
-    @DeleteMapping("/s/user/{id}/pet-delete-form")
+    @DeleteMapping("/s/api/user/{id}/pet-delete-form")
     public String petDelete() {
         return null;
     }

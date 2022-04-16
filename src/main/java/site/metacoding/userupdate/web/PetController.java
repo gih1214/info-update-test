@@ -22,10 +22,10 @@ public class PetController {
     private final HttpSession session;
 
     // 테스트 완료
-    // 펫정보 관리하기 폼
-    @GetMapping("/s/user/{id}/pet-update-form")
-    public String updateForm(@PathVariable Integer id, Model model) {
-        Pet petEntity = petService.펫정보보기(id);
+    // 펫정보 수정하기 폼
+    @GetMapping("/s/user/{userId}/pet-update-form")
+    public String updateForm(@PathVariable Integer userId, Model model) {
+        Pet petEntity = petService.펫정보보기(userId);
         model.addAttribute("pet", petEntity);
         // syso은 User에서 toString을 직접 설정했을 때만 사용할 것. 아니면 오류터짐
         // System.out.println(petEntity);
@@ -34,22 +34,22 @@ public class PetController {
 
     // 테스트 완료
     // 펫정보 추가하기 폼
-    @GetMapping("/s/user/{id}/pet-form")
-    public String petInfoForm(@PathVariable Integer id, Model model) {
-        User userEntity = userService.펫정보추가폼(id);
+    @GetMapping("/s/user/{userId}/pet-form")
+    public String petInfoForm(@PathVariable Integer userId, Model model) {
+        User userEntity = userService.펫정보추가폼(userId);
         model.addAttribute("user", userEntity);
         return "/pet/petInfoForm";
     }
 
     // 테스트 완료
     // 펫정보 추가하기
-    @PostMapping("/s/user/{id}/pet")
-    public String petInfo(@PathVariable Integer id, Pet pet) {
+    @PostMapping("/s/user/{userId}/pet")
+    public String petInfo(@PathVariable Integer userId, Pet pet) {
         User principal = (User) session.getAttribute("principal");
 
         pet.setUser(principal);
-        petService.펫정보추가(id, pet);
+        petService.펫정보추가(userId, pet);
 
-        return "redirect:/s/user/" + id + "/pet-update-form";
+        return "redirect:/s/user/" + userId + "/pet-update-form";
     }
 }
