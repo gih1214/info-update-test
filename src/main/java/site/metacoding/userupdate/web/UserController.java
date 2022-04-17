@@ -48,27 +48,12 @@ public class UserController {
         return "/user/joinForm";
     }
 
-    // 리팩토링 필요 - uuid 서비스로 이동해야 됨
+    // 리팩토링 완료
     // 테스트 완료
     // 회원가입
     @PostMapping("/join")
     public String join(JoinDto joinDto) {
-        UUID uuid = UUID.randomUUID(); // 범용 고유 식별자
-        String requestFileName = joinDto.getFile().getOriginalFilename();
-        // System.out.println("전송받은 파일명 : " + requestFileName);
-
-        String userImgurl = uuid + "_" + requestFileName;
-
-        Path filePath = Paths.get("src/main/resources/static/upload/" + userImgurl);
-
-        try {
-            // System.out.println(filePath);
-            Files.write(filePath, joinDto.getFile().getBytes()); // 파일 경로, 이미지(바이트)
-            userService.회원가입(joinDto.toEntity(userImgurl)); // DB에는 이미지 경로를 저장
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        userService.회원가입(joinDto);
         return "redirect:/login-form";
     }
 

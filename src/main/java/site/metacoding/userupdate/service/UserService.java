@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.userupdate.domain.user.User;
 import site.metacoding.userupdate.domain.user.UserRepository;
 import site.metacoding.userupdate.web.api.dto.user.ImgUploadDto;
+import site.metacoding.userupdate.web.api.dto.user.JoinDto;
 import site.metacoding.userupdate.web.api.dto.user.UpdateDto;
 
 @RequiredArgsConstructor
@@ -97,10 +98,25 @@ public class UserService {
         }
     }
 
+    // 리팩토링 완료
     // 테스트 완료
     // 회원가입
     @Transactional
-    public void 회원가입(User user) {
-        userRepository.save(user);
+    public void 회원가입(JoinDto joinDto) {
+        UUID uuid = UUID.randomUUID(); // 범용 고유 식별자
+        String requestFileName = joinDto.getFile().getOriginalFilename();
+        // System.out.println("전송받은 파일명 : " + requestFileName);
+
+        String userImgurl = uuid + "_" + requestFileName;
+
+        Path filePath = Paths.get("src/main/resources/static/upload/" + userImgurl);
+        // System.out.println(filePath);
+
+        try {
+            Files.write(filePath, joinDto.getFile().getBytes()); // 파일 경로, 이미지(바이트)
+            userRepository.save(joinDto.toEntity(userImgurl));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
